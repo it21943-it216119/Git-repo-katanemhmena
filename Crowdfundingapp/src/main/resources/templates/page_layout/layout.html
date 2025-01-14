@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrowdFundingX</title>
+    <style>
+
+        *{
+            margin: 0;
+        }
+
+        body, html, h1, h2, p, a {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #b2dfdb; /* Light teal background for the entire body */
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Stretch body to the full height of the viewport */
+            text-align: center; /* Center align text globally */
+            justify-content: center; /* Vertically center content */
+            align-items: center; /* Horizontally center content */
+            min-height: 100vh;
+        }
+
+
+
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allow this container to grow and take available space */
+            width: 100%;
+
+        }
+
+        /* Header Styling */
+        header.masthead {
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            color: white;
+            padding: 40px 0;
+            border-bottom: 4px solid #ddd;
+        }
+
+        header .inner {
+            text-align: center;
+            width: 100%; /* Ensure full width for the header */
+            box-sizing: border-box;
+        }
+
+        header h3.masthead-brand {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        nav.nav-masthead {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a.nav-link {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav a.nav-link.active, nav a.nav-link:hover {
+            color: #1cc88a;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            padding: 60px 20px;
+            flex-grow: 1; /* Ensure the main content grows to fill available space */
+            min-height: 0; /* Allow the content to shrink */
+            box-sizing: border-box;
+            overflow-wrap: break-word; /* Break long words to avoid overflow */
+
+        }
+
+        .main-content h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1rem;
+        }
+
+        table thead th {
+            background-color: #4e73df;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        table tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #a2f2cd;
+
+        }
+
+
+
+        a {
+            color: #4e73df;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 20%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        input[type="text"] {
+            width: 20%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        input[type="password"] {
+            width: 20%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        input[type="password"] {
+            width: 20%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #1cc88a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 20%;
+        }
+        .btn{
+            background-color: #1cc88a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #138a5c;
+        }
+
+        button:hover {
+            background-color: #138a5c;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="cover-container">
+    <!-- Header -->
+    <header class="masthead mb-auto" th:replace="page_layout/header :: header"></header>
+
+    <!-- Main Content -->
+    <main class="main-content" layout:fragment="main-content">
+        <h1>This is the main content which will be decorated by the actual page returned in the controller</h1>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mastfoot mt-auto" th:replace="page_layout/footer :: footer"></footer>
+</div>
+
+</body>
+</html>

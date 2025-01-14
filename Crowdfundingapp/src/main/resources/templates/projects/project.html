@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>New Project</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+  <form action="#" th:action="@{/projects/new}" th:object="${project}"
+        method="post">
+
+
+    <div class="form-group">
+      <label for="name">Project Name</label>
+      <input type="text" id="name" class="form-control" th:field="*{name}">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Put a brief description of your Project</label>
+      <input type="text" id="description" class="form-control" th:field="*{description}">
+    </div>
+
+    <div class="form-group">
+      <label for="fundingGoal">Funding Goal</label>
+      <input type="number" id="fundingGoal" class="form-control" th:field="*{fundingGoal}" step="0.01" min="100">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header class="masthead mb-auto" th:fragment="header">
+    <div class="inner">
+        <h3 class="masthead-brand">CrowdFundingX</h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/projects">Projects</a>
+            <a sec:authorize="hasRole('SUPPORTER')" class="nav-link" href="/projects/supportedprojects">Supported Projects</a>
+            <a sec:authorize="hasRole('FOUNDER')" class="nav-link" href="/projects/myprojects">My Projects</a>
+            <a sec:authorize="hasRole('SUPPORTER')" class="nav-link" href="/notifications">Notifications</a>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/users">Users</a>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/approval">Project Approval</a>
+            <a sec:authorize="!isAuthenticated()"  class="nav-link">
+                <a  class="nav-link" href="/login">Login</a>
+                <a  class="nav-link" href="/register">Register</a>
+            </a>
+            <a sec:authorize="isAuthenticated()"  class="nav-link">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit"  class="btn btn-primary" value="Sign Out"/>
+                </form>
+            </a>
+
+        </nav>
+    </div>
+</header>
+
+</body>
+</html>
