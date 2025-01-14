@@ -32,7 +32,7 @@
 ## Clone project
 - Εκτελέστε την εντολή:
      ```bash
-     git clone
+     git clone https://github.com/it21943-it216119/Git-repo-katanemhmena.git
      ```
 
 
