@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -73,14 +72,14 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> opt = userRepository.findByUsername(username);
+        Optional<User> opt = userRepository.findByEmail(username);
 
         if(opt.isEmpty())
             throw new UsernameNotFoundException("User with username: " +username +" not found !");
         else {
             User user = opt.get();
             return new org.springframework.security.core.userdetails.User(
-                    user.getEmail(),
+                    user.getUsername(),
                     user.getPassword(),
                     user.getRoles()
                             .stream()
@@ -95,6 +94,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    @Transactional
     public Object getUser(Long userId) {
         return userRepository.findById(userId).get();
     }
@@ -103,4 +103,15 @@ public class UserService implements UserDetailsService {
     public void updateOrInsertRole(Role role) {
         roleRepository.updateOrInsert(role);
     }
+
+    @Transactional
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found: " + username));
+    }
+
+
+
+
+
+
 }

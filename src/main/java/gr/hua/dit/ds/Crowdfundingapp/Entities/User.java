@@ -22,21 +22,23 @@ import java.util.Set;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Username is required")
     @Size(max = 20)
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Email is required")
     @Size(max = 50)
     @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password is required")
     @Size(max = 120)
     private String password;
 
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Notification> notifications = new ArrayList<>();
+    @OneToMany(mappedBy = "founder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Project> projects = new ArrayList<>();
+
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -52,6 +54,15 @@ import java.util.Set;
         this.email = email;
         this.password = password;
     }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
 
     public Integer getId() {
         return id;
@@ -85,13 +96,7 @@ import java.util.Set;
         this.password = password;
     }
 
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
 
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
 
     public Set<Role> getRoles() {
         return roles;

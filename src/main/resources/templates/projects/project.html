@@ -17,16 +17,21 @@
     <div class="form-group">
       <label for="name">Project Name</label>
       <input type="text" id="name" class="form-control" th:field="*{name}">
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"> </span>
     </div>
 
     <div class="form-group">
-      <label for="description">Put a brief description of your Project</label>
-      <input type="text" id="description" class="form-control" th:field="*{description}">
+      <label for="description">Please provide a description of your Project (Size Minimum 50 characters)</label>
+      <textarea id="description" name="description" class="form-control" rows="4" th:field="*{description}"></textarea>
+      <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="error"></span>
+
     </div>
 
     <div class="form-group">
-      <label for="fundingGoal">Funding Goal</label>
-      <input type="number" id="fundingGoal" class="form-control" th:field="*{fundingGoal}" step="0.01" min="100">
+      <label for="fundingGoal">Funding Goal(Minimum 100)</label>
+      <input type="number" id="fundingGoal" class="form-control" th:field="*{fundingGoal}" step="0.01" min="100" max="1000000">
+      <span th:if="${#fields.hasErrors('fundingGoal')}" th:errors="*{fundingGoal}" th:errorclass="error"></span>
+
     </div>
 
 

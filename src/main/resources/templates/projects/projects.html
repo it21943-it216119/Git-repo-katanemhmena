@@ -19,7 +19,6 @@
                 <th>Description</th>
                 <th>Funding Goal</th>
                 <th>Current Funding</th>
-                <th>Status</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -29,7 +28,6 @@
                 <td th:text="${project.description}"></td>
                 <td th:text="${project.fundingGoal}"></td>
                 <td th:text="${project.currentFunding}"></td>
-                <td th:text="${project.status}"></td>
                 <td>
                     <a th:href="@{'/projects/' + ${project.id}}">Details</a>
                     <a sec:authorize="hasRole('SUPPORTER')" th:href="@{'/projects/donate/' + ${project.id}}">Donate</a>
@@ -41,7 +39,6 @@
     <div th:if="${ #lists.isEmpty(projects)}">
        <h1> No Projects yet stay tuned! </h1>
     </div>
-    <a sec:authorize="hasRole('FOUNDER')" href="/projects/new" class="btn btn-primary" role="button">Create new Project</a>
 </div>
 </body>
 </html>

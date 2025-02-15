@@ -20,7 +20,7 @@
         }
 
         body {
-            background-color: #b2dfdb; /* Light teal background for the entire body */
+            background-color: #999798; /* Light teal background for the entire body */
             color: #333;
             font-size: 16px;
             line-height: 1.6;
@@ -132,7 +132,7 @@
         table tbody td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
-            background-color: #a2f2cd;
+            background-color: #ccc8ca;
 
         }
 
@@ -162,7 +162,7 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-        input[type="text"] {
+        input[type="text"], textarea {
             width: 20%;
             padding: 10px;
             margin-bottom: 15px;
@@ -191,11 +191,11 @@
             background-color: #1cc88a;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 10px 10px;
+            font-size: 14px;
             cursor: pointer;
-            border-radius: 5px;
-            width: 20%;
+            border-radius: 4px;
+            width: 30%;
         }
         .btn{
             background-color: #1cc88a;
@@ -215,6 +215,11 @@
             background-color: #138a5c;
         }
 
+        .form-text {
+            font-size: 0.875rem;
+            color: #6c757d; /* A subtle color for helper text */
+        }
+
 
     </style>
 </head>
@@ -226,6 +231,7 @@
 
     <!-- Main Content -->
     <main class="main-content" layout:fragment="main-content">
+
         <h1>This is the main content which will be decorated by the actual page returned in the controller</h1>
     </main>
 

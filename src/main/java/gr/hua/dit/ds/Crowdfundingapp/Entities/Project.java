@@ -3,25 +3,35 @@ package gr.hua.dit.ds.Crowdfundingapp.Entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+@Table(name = "project")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer id;
+
     @Column
+    @NotBlank
     private String name;
+
     @Column
+    @NotBlank
+    @Size(min = 20)
     private String description;
+
     @Column
+    @NotNull
     private Double fundingGoal;
+
     @Column
-    private Double currentFunding = 0.0;
+    private Double currentFunding;
 
 
     @Enumerated(EnumType.STRING)
@@ -33,10 +43,26 @@ public class Project {
     @JoinColumn(name="founder_id")
     private User founder;
 
-    @OneToMany(mappedBy = "fundedProject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "fundedProject",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Funding> fundings = new ArrayList<>();
 
-    public Project(Integer id, String name, String description, Double fundingGoal, Double currentFunding, ProjectStatus status, User founder, List<Funding> fundings) {
+    @OneToMany(mappedBy = "relatedProject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications = new ArrayList<>();
+
+    @PostLoad
+    @PrePersist
+    @PreUpdate
+    private void updateCurrentFunding() {
+        if (fundings == null || fundings.isEmpty()) {
+            this.currentFunding = 0.0;
+        } else {
+            this.currentFunding = fundings.stream()
+                    .mapToDouble(Funding::getAmount)
+                    .sum();
+        }
+    }
+
+    public Project(Integer id, String name, String description, Double fundingGoal, Double currentFunding, ProjectStatus status, User founder, List<Funding> fundings, List<Notification> notifications) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -45,12 +71,21 @@ public class Project {
         this.status = status;
         this.founder = founder;
         this.fundings = fundings;
+        this.notifications = notifications;
     }
 
     public Project(String name, String description, Double fundingGoal) {
         this.name = name;
         this.description = description;
         this.fundingGoal = fundingGoal;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     public Project() {
@@ -119,6 +154,9 @@ public class Project {
     public void setFundings(List<Funding> fundings) {
         this.fundings = fundings;
     }
+
+
+
 
     @Override
     public String toString() {

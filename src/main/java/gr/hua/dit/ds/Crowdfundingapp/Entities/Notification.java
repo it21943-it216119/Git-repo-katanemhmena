@@ -3,6 +3,7 @@ package gr.hua.dit.ds.Crowdfundingapp.Entities;
 
 import jakarta.persistence.*;
 import gr.hua.dit.ds.Crowdfundingapp.Entities.Project;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "notifications")
@@ -11,13 +12,9 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     @Column(nullable = false)
     private String message;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name="recipient_id")
-    private User recipient;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
@@ -47,13 +44,7 @@ public class Notification {
         this.message = message;
     }
 
-    public User getRecipient() {
-        return recipient;
-    }
 
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
 
     public Project getRelatedProject() {
         return relatedProject;

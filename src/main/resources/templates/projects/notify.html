@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+
+  <div th:if="${success}" class="alert alert-success">
+    <p th:text="${success}"></p>
+  </div>
+
+
+  <h2>Create a New Notification</h2>
+  <form th:action="@{'/myprojects/notify/' + ${project.id}}" method="post">
+    <div>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+    </div>
+    <button type="submit">Create Notification</button>
+  </form>
+
+  <!-- List of notifications -->
+  <h2>Existing Notifications</h2>
+  <div th:if="${not #lists.isEmpty(notifications)}">
+    <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Notification Message</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="notification : ${notifications}">
+        <td th:text="${notification.relatedProject.name}"></td>
+        <td th:text="${notification.message}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${#lists.isEmpty(notifications)}">
+    <p>No notifications found for this project.</p>
+  </div>
+</div>
+</body>
+</html>

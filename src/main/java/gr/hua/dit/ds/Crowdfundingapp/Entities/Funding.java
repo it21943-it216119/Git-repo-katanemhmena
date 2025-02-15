@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import gr.hua.dit.ds.Crowdfundingapp.Entities.Project;
 
 @Entity
-public class Funding {
+@Table(name = "funding")
+public class  Funding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

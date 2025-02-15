@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Projects</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+
+  <div th:if="${error}" class="alert alert-error">
+    <p th:text="${error}"></p>
+  </div>
+
+  <div th:if="${success}" class="alert alert-success">
+    <p th:text="${success}"></p>
+  </div>
+
+  <div th:if="${ not#lists.isEmpty(projects)}">
+    <h2>Your created projects are listed below!</h2>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Funding Goal</th>
+        <th>Current Funding</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="project : ${projects}">
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.fundingGoal}"></td>
+        <td th:text="${project.currentFunding}"></td>
+        <td th:text="${project.status}"></td>
+        <td>
+          <a th:href="@{'/projects/' + ${project.id}}">Details</a>
+          <a th:href="@{'/projects/donate/' + ${project.id}}">Donate</a>
+          <a th:href="@{'/myprojects/notify/' + ${project.id}}">Notify Donors</a>
+          <a th:href="@{'/myprojects/delete/' + ${project.id}}">Delete Project</a>
+          <a th:href="@{'/myprojects/edit/' + ${project.id}}">Edit Project</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${ #lists.isEmpty(projects)}">
+    <h1> You haven't created any projects yet! </h1>
+  </div>
+  <a sec:authorize="hasRole('FOUNDER')" href="/projects/new" class="btn btn-primary" role="button">Create new Project</a>
+</div>
+</body>
+</html>

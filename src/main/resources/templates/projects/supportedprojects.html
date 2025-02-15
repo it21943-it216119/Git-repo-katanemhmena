@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      layout:decorate="~{page_layout/layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Supported Projects</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div th:if="${ not#sets.isEmpty(projects)}">
+    <h2>The projects you have donated to are listed below!</h2>
+
+     <table>
+      <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Funding Goal</th>
+        <th>Current Funding</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="project : ${projects}">
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.fundingGoal}"></td>
+        <td th:text="${project.currentFunding}"></td>
+        <td>
+          <a th:href="@{'/projects/' + ${project.id}}">Details</a>
+          <a sec:authorize="hasRole('SUPPORTER')" th:href="@{'/projects/donate/' + ${project.id}}">Donate</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${ #sets.isEmpty(projects)}">
+    <h1> You haven't donated to any projects yet! </h1>
+  </div>
+</div>
+</body>
+</html>
