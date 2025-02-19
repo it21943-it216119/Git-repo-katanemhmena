@@ -35,8 +35,8 @@
             <tr th:each="project : ${projects}">
                 <td th:text="${project.name}"></td>
                 <td th:text="${project.description}"></td>
-                <td th:text="${project.fundingGoal}"></td>
-                <td th:text="${project.currentFunding}"></td>
+                <td th:text="${project.fundingGoal} + '$'"></td>
+                <td th:text="${project.currentFunding} + '$'"></td>
                 <td th:text="${project.status}"></td>
                 <td th:text="${project.founder.username}"></td>
                 <td>

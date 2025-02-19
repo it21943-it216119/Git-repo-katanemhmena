@@ -21,7 +21,7 @@ public class Project {
     @NotBlank
     private String name;
 
-    @Column
+    @Column(length = 1000)
     @NotBlank
     @Size(min = 20)
     private String description;

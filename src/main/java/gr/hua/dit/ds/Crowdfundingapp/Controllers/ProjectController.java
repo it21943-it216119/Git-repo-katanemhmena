@@ -73,7 +73,7 @@ public class ProjectController {
             projectService.saveProject(project);
             founder.getProjects().add(project);
             model.addAttribute("projects", projectService.getProjects());
-            return "projects/projects";
+            return "projects/myprojects";
         }
     }
 

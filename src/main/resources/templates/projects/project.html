@@ -21,9 +21,8 @@
     </div>
 
     <div class="form-group">
-      <label for="description">Please provide a description of your Project (Size Minimum 50 characters)</label>
-      <textarea id="description" name="description" class="form-control" rows="4" th:field="*{description}"></textarea>
-      <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="error"></span>
+      <label for="description">Please provide a description of your Project (Size Minimum 20 characters)</label>
+      <textarea id="description" name="description" class="form-control" rows="6" th:field="*{description}"></textarea>
 
     </div>
 

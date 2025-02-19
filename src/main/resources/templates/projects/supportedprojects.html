@@ -29,8 +29,8 @@
       <tr th:each="project : ${projects}">
         <td th:text="${project.name}"></td>
         <td th:text="${project.description}"></td>
-        <td th:text="${project.fundingGoal}"></td>
-        <td th:text="${project.currentFunding}"></td>
+        <td th:text="${project.fundingGoal} + '$'"></td>
+        <td th:text="${project.currentFunding} + '$'"></td>
         <td>
           <a th:href="@{'/projects/' + ${project.id}}">Details</a>
           <a sec:authorize="hasRole('SUPPORTER')" th:href="@{'/projects/donate/' + ${project.id}}">Donate</a>
